@@ -2,6 +2,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 15px;
     line-height: 1.5;
+    min-width: 380px;
     margin: 0;
     padding: 0;
     background-color: whitesmoke;
@@ -20,6 +21,11 @@ hr {
     margin-bottom: 50px;
 }
 
+span {
+    text-decoration: underline;
+    color: blue;
+}
+
 
 /* header */
 header {
@@ -28,6 +34,10 @@ header {
     padding: 30px;
     min-height: 70px;
     border-bottom: black 4px solid;
+}
+
+header .container {
+    display: flex;
 }
 
 header ul {
@@ -42,29 +52,30 @@ header a {
 
 header img {
     width: 80px;
+    height: 80px;
     margin-top: 10px;
-    float: left;
+
 }
 
 header #brand-name {
-    float: left;
+    display: flex;
 }
 
 header #brand-name h1 {
-    float: left;
     margin-top: 30px;
     font-size: 40px;
     text-transform: uppercase;
 }
 
 header nav {
-    float: right;
+    margin: auto;
     margin-top: 55px;
+    margin-right: 0%;
 }
 
 header li {
     color: white;
-    display: inline;
+    display: inline-block;
     font-size: 16px;
     font-weight: bold;
     padding: 0 20px 0 20px;
@@ -227,28 +238,67 @@ footer {
 }
 
 
-@media (max-width: 1000px){
+@media (max-width: 930px){
 
-    header #brand-name {
-        text-align: center;
-        float: none;
+    header {
+        background-color: orange;
+        color: white;
+        padding: 0;
+        min-height: 70px;
+        border-bottom: black 4px solid;
     }
-
-    header nav {
-        float: none;
+    
+    header .container {
+        width: 100%;
+        display: grid;
+    }
+    
+    header #brand-name {
+        display: flex;
+        height: 100px;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    header img {
+        width: 80px;
+        height: 80px;
         margin-top: 10px;
     }
 
-    header nav ul li{
-        text-align: center;
-        display: block;
+    header #brand-name h1 {
+        font-size: 40px;
+        text-transform: uppercase;
+        /* width: 100%;
+        position: absolute;
+        text-align: center; */
+    }
+    
+    header nav {
+        margin: auto;
+        width: 100%;
+    }
+
+    header ul {
+        display: flex;
+        width: 100%;
+    }
+    
+    header li {
+        color: white;
+        display: inline-block;
+        font-size: 12px;
+        font-weight: bold;
+        padding: 0 10px 10px 10px;
+        margin: auto;
     }
 
     #welcome-section {
         color: white;
         background: url('img/office.png') no-repeat;
+        min-height: auto;
         background-position: center;
-        background-size: 120%;
+        background-size: auto;
         text-align: center;
     }
 
@@ -288,6 +338,10 @@ footer {
         margin-bottom: 10px;
     }
 
+
+    td, th {
+        border-bottom: 1px solid #dddddd;
+      }
 
     .first_col {
         padding-left: 0px;
