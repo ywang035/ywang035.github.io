@@ -16,18 +16,31 @@ function get_quote_of_the_day() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
 
-        if (this.readyState == 4 && this.status == 200) {
-            // Access the result here
-            //  alert(this.responseText);
-
-            var obj = JSON.parse(this.responseText);
-            // alert(obj.contents.quotes[0].quote);
-            quote.innerHTML = "“ " + obj.contents.quotes[0].quote + " ”";
-            author.innerHTML = "---- " + obj.contents.quotes[0].author;
-            document.body.style.display = 'block';
-        } else {
-            //  alert("failed");
+        if(this.readyState == 4){
+            if(this.status == 200){
+                var obj = JSON.parse(this.responseText);
+                quote.innerHTML = "“ " + obj.contents.quotes[0].quote + " ”";
+                author.innerHTML = "---- " + obj.contents.quotes[0].author;
+                document.body.style.display = 'block';
+            }else{
+                quote.innerHTML = " Whoever is happy will make others happy too. ";
+                author.innerHTML = "---- " + " Anne Frank";
+                document.body.style.display = 'block';
+            }
         }
+
+
+        // if (this.readyState == 4 && this.status == 200) {
+        //     // Access the result here
+        //     //  alert(this.responseText);
+
+        //     var obj = JSON.parse(this.responseText);
+        //     quote.innerHTML = "“ " + obj.contents.quotes[0].quote + " ”";
+        //     author.innerHTML = "---- " + obj.contents.quotes[0].author;
+        //     // document.body.style.display = 'block';
+        // } else {
+        //     //  alert("failed");
+        // }
 
     };
     xhttp.open("GET", `${proxy}https://quotes.rest/qod?category=inspire`, true);
