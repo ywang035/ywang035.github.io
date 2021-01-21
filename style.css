@@ -198,7 +198,7 @@ ul li:nth-child(1) a:focus {
 
 
 #welcome .grid-item1 img {
-    width: 80px;
+    width: 100px;
     border-radius: 50%;
     border: 3px lightgray dotted;
 }
@@ -250,7 +250,9 @@ ul li:nth-child(1) a:focus {
 
 #project .grid-item2 img {
     width: 80px;
-    padding: 40px;
+    /* padding: 40px; */
+    border-radius: 10px;
+    margin-top: 40px;
 }
 
 #project h3 {
@@ -294,7 +296,7 @@ ul li:nth-child(1) a:focus {
 #contact .grid-container3{
     width: 90%;
     position: relative;
-    top: 100px;
+    top: 20%;
     margin-left: auto;
     margin-right: auto;
     display: grid;
