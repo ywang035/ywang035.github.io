@@ -274,9 +274,9 @@ ul li:nth-child(1) a:focus {
 }
 
 #project .grid-item2:nth-of-type(6n) h2{
-    margin-top: 90px;
-    font-size: 400%;
-    color: gray;
+    /* margin-top: 90px; */
+    /* font-size: 400%; */
+    color: orange;
 }
 
 #project .grid-item2 p {
