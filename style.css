@@ -9,6 +9,7 @@
     }
 }
 
+
 body {
     display: none;
     padding: 0;
@@ -53,6 +54,7 @@ header #branding img {
     height: 35px;
     padding: 10px;
     margin: auto;
+    margin-top: 5px;
 }
 
 header #branding h1 {
@@ -85,10 +87,14 @@ header ul {
 header ul li a {
     color: gray;
     text-decoration: none;
-    padding: 10px;
+    padding: 10px 5px;
     margin: 0 10px;
     text-transform: uppercase;
     font-weight: bold;
+}
+
+.nav-active {
+    border-bottom: orange 3px solid;
 }
 
 ul li:nth-child(1) a:focus {
