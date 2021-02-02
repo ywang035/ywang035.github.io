@@ -43,6 +43,7 @@ header {
     position: fixed;
     display: flex;
     margin-left: 2%;
+    z-index: 1;
 }
 
 header #branding {
@@ -68,8 +69,9 @@ header #branding h1 {
 header #branding h1 a {
     text-decoration: none;
     color: gray;
-
 }
+
+
 
 header nav {
     /* width: 100%; */
@@ -93,13 +95,17 @@ header ul li a {
     font-weight: bold;
 }
 
+header ul li a:hover {
+    color: orange;
+}
+
 .nav-active {
     border-bottom: orange 3px solid;
 }
 
-ul li:nth-child(1) a:focus {
+/* ul li:nth-child(1) a:focus {
     color: red;
- }
+} */
 
 
 
@@ -121,9 +127,9 @@ ul li:nth-child(1) a:focus {
 
 #box1 {
     align-content: flex-start;
-    width: 600px;
+    width: 40%;
     height: 400px;
-    margin-left: auto;
+    margin-left: 50px;
     margin-right: auto;
 }
 
@@ -139,12 +145,18 @@ ul li:nth-child(1) a:focus {
     color: orange;
 }
 
+#box1 #source{
+    text-align: end;
+    margin-top: -20px;
+    position: relative;
+}
+
 
 #box2 {
     align-content: flex-end;
     margin-left: auto;
     margin-right: auto;
-    width: 400px;
+    width: 40%;
 }
 
 
@@ -152,6 +164,8 @@ ul li:nth-child(1) a:focus {
     background-color: orange;
     width: 400px;
     height: 400px;
+    /* margin-left: 70px; */
+    margin-right: 50px;
     border-radius: 50%;
     z-index: 2;
     position: absolute;
@@ -192,7 +206,6 @@ ul li:nth-child(1) a:focus {
 #welcome .grid-item1 {
     zoom: 80%;
     text-align: center;
-    /* width: 50%; */
     margin: auto;
     transition: transform 0.75s;
 }
@@ -218,7 +231,6 @@ ul li:nth-child(1) a:focus {
 }
 
 #project .grid-container2 {
-    /* margin-top: 3%; */
     display: grid;
     grid-template-columns: auto auto auto;
     margin: auto auto auto auto;
@@ -444,5 +456,158 @@ ul li:nth-child(1) a:focus {
 
 
 
+@media (max-width: 950px) {
+    section {
+        scroll-snap-align:unset;
+    }
+
+    /* header section */
 
 
+header nav {
+    /* width: 100%; */
+    align-content: initial;
+}
+
+header ul {
+    display: block;
+    margin-top: 15px;
+}
+
+header ul li a {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: small;
+}
+
+
+
+/* welcome section */
+#welcome {
+    height: 900px;
+    width: 100%;
+}
+
+#welcome .welcome-container {
+    position: relative;
+    top: 10px;
+    flex-direction: column;
+    animation: 1s ease-out 0s 1 fadeFromTop;
+}
+
+
+#box1 {
+    align-content: center;
+    width: 95%;
+    height: 200px;
+    margin: 0;
+    margin-top: 30px;
+    padding: 0 10px;
+}
+
+#box1 #quote {
+    font-size: small;
+}
+
+#box1 #author {
+    font-size: small;
+}
+
+#box1 #source{
+    margin-top: -15px;
+    font-size: small;
+}
+
+
+#box2 {
+    width: 350px;
+    height: 350px;
+    align-content: center;
+    margin-top: 10%;
+}
+
+
+#welcome .welcome-container .box #circle {
+    width: 335px;
+    height: 335px;
+    margin-left: 8px;
+    z-index: 0;
+}
+
+
+#welcome .welcome-container h1 {
+    font-size: 300%;
+    margin-top: 25%;
+}
+
+
+
+#welcome .grid-container1 {
+    margin-top: 110px;
+    position: relative;
+}
+
+
+/* project section */
+#project {
+    height: 900px;
+    width: 100%;
+}
+
+#project .grid-container2 {
+    grid-template-columns: auto auto;
+    margin: auto auto auto;
+    top: 80px;
+    width: 100%;
+}
+
+#project .grid-item2 {
+    width: 160px;
+    height: 230px;
+}
+
+
+#project h3 {
+    width: 160px;
+    padding: 105px 0;
+}
+
+
+/* contact section */
+#contact {
+    height: 1000px;
+}
+
+#contact .grid-container3{
+    margin-top: -150px;
+    grid-template-columns: auto;
+}
+
+#contact .grid-item3 {
+    width: 300px;
+    margin-top: 50px;
+}
+
+
+#contact h1 {
+    font-size: medium;
+}
+
+#contact input {
+    width: 200px;
+    height: 30px;
+    margin-top: 10px;
+}
+
+#contact textarea {
+    width: 200px;
+    height: 160px;
+    margin-top: 10px;
+}
+
+#contact .grid-item3 #submit {
+    margin: 0 0 0 -160px;
+    bottom: -100px;
+}
+
+}
