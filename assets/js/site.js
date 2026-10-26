@@ -56,39 +56,55 @@
   }
 
   /* Three-phone panels keep their side phones folded behind the centre one
-     until the panel's middle scrolls up to just below mid-screen, then open. */
-  if (!reduce) {
-    var line = function () { return window.innerHeight * 0.55; };
-    var middle = function (el) { var r = el.getBoundingClientRect(); return r.top + r.height / 2; };
-    var folded = [];
-    document.querySelectorAll(".panel").forEach(function (panel) {
-      if (panel.querySelector(".trio") && middle(panel) > line()) {
-        panel.classList.add("folded");
-        folded.push(panel);
-      }
-    });
-    var ticking = false;
-    var unfold = function () {
-      ticking = false;
-      folded = folded.filter(function (panel) {
-        if (middle(panel) > line()) return true;
+     until the panel's middle scrolls up to just below mid-screen, then open.
+     A marker at each panel's middle is watched against a line at 55% of the
+     viewport, so scrolling runs no script; the line's area reaches far above
+     the screen, so jumping past a panel opens it too. Once the sides land,
+     both classes go and the sides give up their layers. */
+  if ("IntersectionObserver" in window && !reduce) {
+    var unfold = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var mark = entry.target, panel = mark.parentNode;
+        var moving = panel.querySelectorAll(".trio .side").length;
+        unfold.unobserve(mark);
+        panel.removeChild(mark);
+        panel.addEventListener("transitionend", function landed(e) {
+          if (e.propertyName !== "transform" || !e.target.classList.contains("side") || --moving) return;
+          panel.removeEventListener("transitionend", landed);
+          panel.classList.remove("folded", "open");
+        });
         panel.classList.add("open");
-        return false;
       });
-      if (!folded.length) window.removeEventListener("scroll", onScroll);
-    };
-    var onScroll = function () {
-      if (!ticking) { ticking = true; requestAnimationFrame(unfold); }
-    };
-    if (folded.length) window.addEventListener("scroll", onScroll, { passive: true });
+    }, { rootMargin: "100000px 0px -45% 0px" });
+    document.querySelectorAll(".panel").forEach(function (panel) {
+      var r = panel.getBoundingClientRect();
+      if (!panel.querySelector(".trio") || r.top + r.height / 2 <= window.innerHeight * 0.55) return;
+      var mark = document.createElement("i");
+      mark.className = "fold-mark";
+      mark.setAttribute("aria-hidden", "true");
+      panel.appendChild(mark);
+      panel.classList.add("folded");
+      unfold.observe(mark);
+    });
+  }
+
+  /* The wallpaper conveyor and the drifting map only run while on screen. */
+  if ("IntersectionObserver" in window) {
+    var idle = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) { entry.target.classList.toggle("idle", !entry.isIntersecting); });
+    });
+    document.querySelectorAll(".marquee, .drift").forEach(function (el) { idle.observe(el); });
   }
 
   /* Hero aura: four soft colour fields drifting, Sfumato's mesh in miniature.
-     Drawn at a quarter size and blurred by CSS; pauses while off screen. */
+     Drawn at a quarter size and blurred by CSS; the drift is so slow that
+     30 frames a second look the same as 60 or 120. Pauses while off screen. */
   var canvas = document.getElementById("aura");
   var ctx = canvas.getContext("2d");
   var glows = [];
   var running = true;
+  var last = -Infinity;
 
   function readGlows() {
     var style = getComputedStyle(root);
@@ -118,7 +134,7 @@
   }
   function loop(t) {
     if (!running) return;
-    draw(t);
+    if (t - last >= 30) { last = t; draw(t); }
     requestAnimationFrame(loop);
   }
 

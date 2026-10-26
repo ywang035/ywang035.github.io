@@ -91,9 +91,14 @@ section[id]{scroll-margin-top:64px}
 
 /* device mocks: Sfumato's own Preview mocks (iPhone 15 Pro, MacBook Pro 16).
    The frame PNG sits on top; the screenshot fills the screen opening measured from the PNG. */
-.iphone,.macbook{position:relative;flex:none;filter:var(--drop)}
+.iphone,.macbook{position:relative;flex:none}
 .iphone{aspect-ratio:434/886}
 .macbook{aspect-ratio:2170/1430}
+/* the shadow is cast by a still copy of the frame behind the device, not by the device itself,
+   so it is painted once: sliding the sides or drifting the map never has to redraw it */
+.iphone::before,.macbook::before{content:"";position:absolute;inset:0;background:center/100% 100% no-repeat;filter:var(--drop)}
+.iphone::before{background-image:url(../img/devices/iphone.png)}
+.macbook::before{background-image:url(../img/devices/macbook.png)}
 .device-frame{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
 .iphone .screen{position:absolute;left:4.84%;top:1.92%;width:90.55%;height:96.16%;object-fit:cover;object-position:top;border-radius:13.7% / 6.3%;display:block}
 .macbook .screen{position:absolute;left:10.18%;top:10.98%;width:79.63%;height:78.04%;overflow:hidden;background:#000}
@@ -101,23 +106,27 @@ section[id]{scroll-margin-top:64px}
 
 /* three devices, one component for every app: the sides slide out from behind the centre.
    --mid is the centre device's width, --ratio its height / width. */
-.trio{--mid:clamp(170px,25vw,270px);--ratio:2.0415;display:flex;justify-content:center;align-items:flex-start;gap:clamp(14px,3vw,36px);margin-top:clamp(40px,6vw,64px);margin-bottom:clamp(32px,5vw,56px)}
+.trio{--mid:clamp(170px,25vw,270px);--ratio:2.0415;display:flex;justify-content:center;align-items:flex-start;margin-top:clamp(40px,6vw,64px);margin-bottom:clamp(32px,5vw,56px)}
 .trio .mid{width:var(--mid);z-index:1}
 /* sides: 80% of the centre device, set so their bottoms end 18px above its bottom
-   (20% of the centre's height, less 18px) */
-.trio .side{width:calc(var(--mid) * .8);margin-top:calc(var(--mid) * var(--ratio) * .2 - 18px);transition:transform .9s cubic-bezier(.2,.8,.2,1)}
-/* the sides wait folded behind the centre until the panel's middle reaches mid-screen (site.js adds .open) */
+   (20% of the centre's height, less 18px), their inner edges just tucked behind it */
+.trio .side{width:calc(var(--mid) * .8);margin-top:calc(var(--mid) * var(--ratio) * .2 - 18px);margin-inline:calc(var(--mid) * -.04);transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+/* the sides wait folded behind the centre until the panel's middle reaches mid-screen (site.js adds .open,
+   then drops both classes once they have landed). While folded they sit on their own layers, ready to move. */
+.panel{position:relative}
+.fold-mark{position:absolute;top:50%;left:0;width:1px;height:1px;pointer-events:none}
+.folded .trio .side{will-change:transform}
 .folded .trio .side.l{transform:translateX(55%) scale(.9)}
 .folded .trio .side.r{transform:translateX(-55%) scale(.9)}
 .folded.open .trio .side{transform:none}
 /* MacBooks are wide, so each side tucks about a quarter of the centre's width behind it */
-.trio.macs{--mid:clamp(250px,42vw,480px);--ratio:.659;gap:0}
+.trio.macs{--mid:clamp(250px,42vw,480px);--ratio:.659}
 .trio.macs .side{margin-inline:calc(var(--mid) * -.24)}
 
 /* wallpapers: an endless, slow conveyor; pauses under the pointer */
 .marquee{overflow:hidden;margin-top:clamp(36px,5vw,56px);-webkit-mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
 .track{display:flex;gap:14px;width:max-content;animation:slide 60s linear infinite;padding-block:10px 4px}
-.marquee:hover .track{animation-play-state:paused}
+.marquee:hover .track,.marquee.idle .track{animation-play-state:paused}
 @keyframes slide{to{transform:translateX(calc(-50% - 7px))}}
 .track figure{margin:0;text-align:left}
 .track img{display:block;width:clamp(124px,16vw,176px);height:auto;aspect-ratio:9/19.5;object-fit:cover;border-radius:24px;box-shadow:0 0 0 1px var(--line);transition:transform .3s ease}
@@ -128,6 +137,7 @@ section[id]{scroll-margin-top:64px}
 
 /* the centre MacBook's map really drifts */
 .macbook .screen.drift > img{position:absolute;left:0;top:0;width:118%;height:auto;max-width:none;animation:drift 34s ease-in-out infinite alternate}
+.drift.idle > img{animation-play-state:paused}
 @keyframes drift{0%{transform:translate(0,0)}100%{transform:translate(-15%,-12%)}}
 .macbook .menu{position:absolute;left:1.6%;bottom:2.4%;font-size:clamp(8px,1vw,11px);font-weight:600;color:#3A3936;background:rgba(243,239,231,.7);padding:3px 7px;border-radius:999px}
 
@@ -149,7 +159,6 @@ section[id]{scroll-margin-top:64px}
 
 @media (max-width:640px){
   .nav nav{display:none}
-  .trio{gap:0}
   .trio .side{margin-inline:-14px}
 }
 @media (prefers-reduced-motion:reduce){
