@@ -1,0 +1,159 @@
+/*
+  Joooe — one calm ground in one tone (light or dark, never alternating).
+  Each app lives in a large rounded panel on that ground, keynote-style.
+
+  Appearance: light by default; dark follows the system unless the visitor
+  picks Light or Dark, which sets data-mode on <html> (see the head script).
+*/
+:root{
+  --bg:#F3EFE7; --panel:#FBF9F4; --ink:#191816; --ink-2:#6B675F; --ink-3:#8E897F;
+  --line:rgba(25,24,22,.10); --btn:#191816; --btn-fg:#F3EFE7; --navbg:rgba(243,239,231,.78);
+  --halo:0 0 0 1px rgba(25,24,22,.08),0 8px 22px -6px rgba(25,24,22,.32),0 1px 3px rgba(25,24,22,.16);
+  --drop:drop-shadow(0 26px 28px rgba(25,24,22,.22));
+  --glow-a:rgba(242,170,140,.55); --glow-b:rgba(150,170,240,.5); --glow-c:rgba(120,210,190,.45);
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue","PingFang SC",Arial,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-mode="light"]){
+    --bg:#141311; --panel:#1C1B19; --ink:#F3EFE7; --ink-2:#A9A49A; --ink-3:#8E897F;
+    --line:rgba(243,239,231,.09); --btn:#F3EFE7; --btn-fg:#191816; --navbg:rgba(20,19,17,.74);
+    --halo:0 0 0 1px rgba(243,239,231,.16),0 0 22px rgba(243,239,231,.22),0 0 2px rgba(243,239,231,.35);
+    --drop:drop-shadow(0 28px 36px rgba(0,0,0,.6));
+    --glow-a:rgba(214,120,90,.38); --glow-b:rgba(90,110,220,.4); --glow-c:rgba(40,160,140,.35);
+    color-scheme:dark;
+  }
+}
+:root[data-mode="dark"]{
+  --bg:#141311; --panel:#1C1B19; --ink:#F3EFE7; --ink-2:#A9A49A; --ink-3:#8E897F;
+  --line:rgba(243,239,231,.09); --btn:#F3EFE7; --btn-fg:#191816; --navbg:rgba(20,19,17,.74);
+  --halo:0 0 0 1px rgba(243,239,231,.16),0 0 22px rgba(243,239,231,.22),0 0 2px rgba(243,239,231,.35);
+  --drop:drop-shadow(0 28px 36px rgba(0,0,0,.6));
+  --glow-a:rgba(214,120,90,.38); --glow-b:rgba(90,110,220,.4); --glow-c:rgba(40,160,140,.35);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);letter-spacing:-.01em;-webkit-font-smoothing:antialiased;transition:background .4s ease,color .4s ease}
+img{max-width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--ink-3);outline-offset:3px;border-radius:6px}
+section[id]{scroll-margin-top:64px}
+
+.wrap{max-width:1120px;margin:0 auto;padding-inline:clamp(14px,3vw,32px)}
+.pill{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-weight:600;border-radius:999px;white-space:nowrap}
+.btn{background:var(--btn);color:var(--btn-fg);font-size:15px;padding:11px 20px;transition:transform .2s ease}
+.btn:hover{transform:translateY(-1px)}
+.plat{font-size:13px;color:var(--ink-3)}
+/* Apple's own badge artwork, unmodified and unanimated, at the 40px on-screen minimum */
+.store-badge{display:inline-flex;border-radius:7px}
+.store-badge img{display:block;height:40px;width:auto}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:5;background:var(--navbg);backdrop-filter:saturate(1.4) blur(18px);-webkit-backdrop-filter:saturate(1.4) blur(18px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:22px;height:52px;font-size:13px}
+.brand{font-weight:700;font-size:17px;letter-spacing:-.03em;margin-right:auto;text-decoration:none}
+.nav nav{display:flex;gap:22px;color:var(--ink-2)}
+.nav nav a{text-decoration:none}
+.nav nav a:hover{color:var(--ink)}
+.mode{display:inline-flex;align-items:center;gap:7px;font:inherit;font-size:12px;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 11px 6px 8px;cursor:pointer}
+.mode svg{width:16px;height:16px}
+
+/* hero with a slow living gradient, Sfumato's own medium */
+.hero{position:relative;text-align:center;padding-block:clamp(60px,10vw,124px) clamp(56px,8vw,100px);overflow:hidden}
+/* the canvas overhangs the hero so the blur never shows an edge, and fades out at the bottom into the page */
+.hero canvas{position:absolute;left:-80px;top:-80px;width:calc(100% + 160px);height:calc(100% + 80px);filter:blur(40px);opacity:.9;
+  -webkit-mask-image:linear-gradient(180deg,#000 35%,transparent 96%);mask-image:linear-gradient(180deg,#000 35%,transparent 96%)}
+.hero .wrap{position:relative}
+.hero .icons{display:flex;justify-content:center;gap:clamp(12px,2.4vw,26px);margin-bottom:clamp(30px,4.4vw,48px)}
+.hero .icons img{width:clamp(58px,9vw,96px);height:auto;border-radius:22.5%;box-shadow:var(--halo);animation:bob 6s ease-in-out infinite}
+.hero .icons img:nth-child(2){animation-delay:-1.5s}
+.hero .icons img:nth-child(3){animation-delay:-3s}
+.hero .icons img:nth-child(4){animation-delay:-4.5s}
+@keyframes bob{50%{transform:translateY(-8px)}}
+.hero h1{font-size:clamp(44px,8.4vw,96px);line-height:1;letter-spacing:-.045em;margin:0;font-weight:700;text-wrap:balance}
+.hero h1 em{font-style:normal;color:var(--ink-3)}
+.hero p{font-size:clamp(17px,2vw,22px);color:var(--ink-2);max-width:30ch;margin:22px auto 0;line-height:1.4;text-wrap:balance}
+.hero .links{display:flex;justify-content:center;flex-wrap:wrap;gap:12px 24px;margin-top:26px;font-size:17px;font-weight:500}
+.hero .links a{text-decoration:none}
+.hero .links a::after{content:" ›"}
+
+/* app panels */
+.panels{display:grid;gap:clamp(14px,2vw,22px);padding-bottom:clamp(14px,2vw,22px)}
+.panel{background:var(--panel);border-radius:clamp(26px,3.6vw,40px);padding-block:clamp(48px,7vw,88px) 0;text-align:center;overflow:hidden;box-shadow:inset 0 0 0 1px var(--line);transition:background .4s ease}
+.panel.pad-b{padding-bottom:clamp(48px,7vw,88px)}
+.eyebrow{display:flex;align-items:center;justify-content:center;gap:12px;font-size:16px;font-weight:600;margin-bottom:18px}
+.eyebrow img{width:44px;height:44px;border-radius:22.5%;box-shadow:var(--halo)}
+.panel h2{font-size:clamp(32px,5.6vw,60px);line-height:1.04;letter-spacing:-.04em;margin:0 auto;font-weight:700;max-width:16ch;text-wrap:balance;padding-inline:16px}
+.sub{font-size:clamp(16px,1.9vw,20px);line-height:1.45;color:var(--ink-2);max-width:40ch;margin:16px auto 0;text-wrap:balance;padding-inline:16px}
+.cta{display:flex;justify-content:center;align-items:center;gap:12px 16px;margin-top:26px;flex-wrap:wrap}
+
+/* device mocks: Sfumato's own Preview mocks (iPhone 15 Pro, MacBook Pro 16).
+   The frame PNG sits on top; the screenshot fills the screen opening measured from the PNG. */
+.iphone,.macbook{position:relative;flex:none;filter:var(--drop)}
+.iphone{aspect-ratio:434/886}
+.macbook{aspect-ratio:2170/1430}
+.device-frame{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+.iphone .screen{position:absolute;left:4.84%;top:1.92%;width:90.55%;height:96.16%;object-fit:cover;object-position:top;border-radius:13.7% / 6.3%;display:block}
+.macbook .screen{position:absolute;left:10.18%;top:10.98%;width:79.63%;height:78.04%;overflow:hidden;background:#000}
+.macbook .screen > img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+
+/* three devices, one component for every app: the sides slide out from behind the centre.
+   --mid is the centre device's width, --ratio its height / width. */
+.trio{--mid:clamp(170px,25vw,270px);--ratio:2.0415;display:flex;justify-content:center;align-items:flex-start;gap:clamp(14px,3vw,36px);margin-top:clamp(40px,6vw,64px);margin-bottom:clamp(32px,5vw,56px)}
+.trio .mid{width:var(--mid);z-index:1}
+/* sides: 80% of the centre device, set so their bottoms end 18px above its bottom
+   (20% of the centre's height, less 18px) */
+.trio .side{width:calc(var(--mid) * .8);margin-top:calc(var(--mid) * var(--ratio) * .2 - 18px);transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+/* the sides wait folded behind the centre until the panel's middle reaches mid-screen (site.js adds .open) */
+.folded .trio .side.l{transform:translateX(55%) scale(.9)}
+.folded .trio .side.r{transform:translateX(-55%) scale(.9)}
+.folded.open .trio .side{transform:none}
+/* MacBooks are wide, so each side tucks about a quarter of the centre's width behind it */
+.trio.macs{--mid:clamp(250px,42vw,480px);--ratio:.659;gap:0}
+.trio.macs .side{margin-inline:calc(var(--mid) * -.24)}
+
+/* wallpapers: an endless, slow conveyor; pauses under the pointer */
+.marquee{overflow:hidden;margin-top:clamp(36px,5vw,56px);-webkit-mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.track{display:flex;gap:14px;width:max-content;animation:slide 60s linear infinite;padding-block:10px 4px}
+.marquee:hover .track{animation-play-state:paused}
+@keyframes slide{to{transform:translateX(calc(-50% - 7px))}}
+.track figure{margin:0;text-align:left}
+.track img{display:block;width:clamp(124px,16vw,176px);height:auto;aspect-ratio:9/19.5;object-fit:cover;border-radius:24px;box-shadow:0 0 0 1px var(--line);transition:transform .3s ease}
+.track figure:hover img{transform:translateY(-6px)}
+.track figcaption{font-size:12px;color:var(--ink-3);margin-top:10px;padding-left:4px}
+.devices{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-top:22px}
+.devices span{font-size:13px;padding:7px 13px;border-radius:999px;border:1px solid var(--line);color:var(--ink-2)}
+
+/* the centre MacBook's map really drifts */
+.macbook .screen.drift > img{position:absolute;left:0;top:0;width:118%;height:auto;max-width:none;animation:drift 34s ease-in-out infinite alternate}
+@keyframes drift{0%{transform:translate(0,0)}100%{transform:translate(-15%,-12%)}}
+.macbook .menu{position:absolute;left:1.6%;bottom:2.4%;font-size:clamp(8px,1vw,11px);font-weight:600;color:#3A3936;background:rgba(243,239,231,.7);padding:3px 7px;border-radius:999px}
+
+/* panels rise into place as they arrive; the resting state is fully visible */
+.armed .rise{transform:translateY(36px);opacity:.35;transition:transform .9s cubic-bezier(.2,.8,.2,1),opacity .9s ease}
+.armed.in .rise{transform:none;opacity:1}
+
+/* footer */
+.foot{padding-block:44px 34px;font-size:13px;color:var(--ink-3)}
+.foot .wrap{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.foot .brand{font-size:22px;color:var(--ink)}
+.foot nav{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.foot a{text-decoration:none}
+.social{display:inline-flex;align-items:center;gap:7px;color:var(--ink-2)}
+.social:hover{color:var(--ink)}
+.social svg{width:16px;height:16px;fill:currentColor;flex:none}
+.social svg.line{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.legal{flex-basis:100%;margin:6px 0 0;font-size:11px;line-height:1.5;color:var(--ink-3)}
+
+@media (max-width:640px){
+  .nav nav{display:none}
+  .trio{gap:0}
+  .trio .side{margin-inline:-14px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none!important;transition:none!important}
+  .armed .rise,.folded .trio .side{transform:none!important;opacity:1!important}
+}
