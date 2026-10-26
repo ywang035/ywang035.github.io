@@ -1,201 +1,163 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Y.Studio | Welcome</title>
-    <link rel="shortcut icon" type="image/png" href="img/site_logo_orange.png">
-    
-    <link rel="stylesheet" href="style.css">
-    
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Joooe · Small and versatile apps</title>
+  <meta name="description" content="Small and versatile apps for iPhone, iPad and Mac, built with love and care by Joooe. Sfumato, PinWall, Drifting Map, NumTrainer and finely crafted wallpaper sets.">
+  <meta name="theme-color" content="#F3EFE7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#141311" media="(prefers-color-scheme: dark)">
+
+  <!-- Link previews on Threads, X and iMessage. Update the URLs when the custom domain is set. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Joooe">
+  <meta property="og:title" content="Joooe · Small and versatile apps">
+  <meta property="og:description" content="For iPhone, iPad and Mac. Built with love and care by Joooe.">
+  <meta property="og:url" content="https://ywang035.github.io/">
+  <meta property="og:image" content="https://ywang035.github.io/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The Sfumato, PinWall, Drifting Map and NumTrainer icons above the words Small and versatile apps.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@gearlessjoooe">
+  <meta name="twitter:creator" content="@gearlessjoooe">
+
+  <link rel="icon" href="favicon.png" sizes="64x64" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="assets/css/site.css">
+
+  <!-- Apply a saved Light/Dark choice before first paint, so the page never flashes the other theme. -->
+  <script>
+    try { var m = localStorage.getItem("joooe-mode"); if (m === "light" || m === "dark") document.documentElement.setAttribute("data-mode", m); } catch (e) {}
+  </script>
+  <script src="assets/js/site.js" defer></script>
 </head>
-
 <body>
+  <header class="nav">
+    <div class="wrap">
+      <a class="brand" href="#top">Joooe</a>
+      <nav aria-label="Sections">
+        <a href="#sfumato">Sfumato</a>
+        <a href="#wallpapers">Wallpapers</a>
+        <a href="#pinwall">PinWall</a>
+        <a href="#drifting-map">Drifting Map</a>
+        <a href="#numtrainer">NumTrainer</a>
+      </nav>
+      <button class="mode" id="mode" type="button" aria-label="Appearance: Auto">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.2" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M8 1.8a6.2 6.2 0 0 1 0 12.4z" fill="currentColor"/></svg>
+        <span id="mode-label">Auto</span>
+      </button>
+    </div>
+  </header>
 
-    <!-- Logo + Navigation -->
-    <header>
-        <div class="container">
-            <!-- brand name -->
-            <div id="brand-name">
-                <img src="img/site_logo.png">
-                <h1>Y.Studio</h1>
-            </div>
-
-            <!-- nav bar -->
-            <nav>
-                <ul>
-                    <li><a href="#welcome-section">welcome</a></li>
-                    <li><a href="#connect-section">connect</a></li>
-                    <li><a href="#experience-section">experience</a></li>
-                    <li><a href="#contact-section">contact</a></li>
-
-                </ul>
-            </nav>
+  <main>
+    <section class="hero" id="top">
+      <canvas id="aura" aria-hidden="true"></canvas>
+      <div class="wrap">
+        <div class="icons">
+          <img src="assets/img/icons/sfumato.jpg" alt="Sfumato" width="96" height="96">
+          <img src="assets/img/icons/pinwall.jpg" alt="PinWall" width="96" height="96">
+          <img src="assets/img/icons/drifting-map.jpg" alt="Drifting Map" width="96" height="96">
+          <img src="assets/img/icons/numtrainer.jpg" alt="NumTrainer" width="96" height="96">
         </div>
-    </header>
-    
-
-    <!-- welcome section -->
-    <section id="welcome-section">
-        <div class="container">
-            <h1>Welcome to Y.STUDIO</h1>
-            <p>I am a recent IT graduate who is actively learning how to make beautiful front-end elements.</p>
-            <p>You can find everything about me including my projects, resume and more</p>
-        </div>
+        <h1>Small and<br><em>versatile apps.</em></h1>
+        <p>For iPhone, iPad and Mac. Built with love and care by Joooe.</p>
+        <div class="links"><a href="#sfumato">See the apps</a><a href="https://joeywallpaper.gumroad.com/" target="_blank" rel="noopener">Shop wallpapers</a></div>
+      </div>
     </section>
 
-
-
-    
-    <!-- project link section -->
-    <section id="connect-section">
-        <div class="container">
-            <!-- box 1 -->
-            <h1>Social and Connect</h1>
-            <div class="inner-container">
-            <div class="box">
-                <img src="img/linkedin.png">
-                <h3><a href="https://www.linkedin.com/in/ywang035/" target=".blank">LinkedIn</a></h3>
-                <p>Check out more of my profile, such as my education background, my intern experience, my volunteer work and more.</p>
-            </div>
-
-            <!-- box 2 -->
-            <div class="box">
-                <img id="git" src="img/github.png">
-                <h3><a href="https://github.com/ywang035?tab=repositories" target=".blank">GitHub</a></h3>
-                <p>Find out about my past projects and all the source code and demonstration. You may see something interesting.</p>
-            </div>
-
-            <!-- box 3 -->
-            <div class="box">
-                <img src="img/app.png">
-                <h3><a href="https://apps.apple.com/us/app/num-trainer/id1531055741" target=".blank">App Store</a></h3>
-                <p>Feel free to download the Apps that I recently published to the App Store. Kind reminder, iOS and iPad OS only.</p>
-            </div>
+    <div class="wrap panels">
+      <section class="panel reveal" id="sfumato">
+        <div class="rise">
+          <div class="eyebrow"><img src="assets/img/icons/sfumato.jpg" alt="">Sfumato</div>
+          <h2>Design your own aesthetic wallpapers.</h2>
+          <p class="sub">Aesthetic gradients with beautiful color palettes, or pick yours from a photo. Fine control, sized for every device you own.</p>
+          <div class="cta"><a class="store-badge" href="https://apps.apple.com/app/sfumato-wallpaper-studio/id6804210449" target="_blank" rel="noopener"><img src="assets/img/badges/app-store.svg" alt="Download on the App Store" width="120" height="40"></a><span class="plat">iPhone · iPad</span></div>
         </div>
+        <div class="trio">
+          <div class="iphone side l"><img class="screen" src="assets/img/screens/sfumato-gradient.jpg" alt="Sfumato Gradient panel with mesh width, height and gradient type" loading="lazy"><img class="device-frame" src="assets/img/devices/iphone.png" alt=""></div>
+          <div class="iphone mid"><img class="screen" src="assets/img/screens/sfumato-canvas.jpg" alt="Sfumato canvas with a gold to plum to midnight gradient and its control points"><img class="device-frame" src="assets/img/devices/iphone.png" alt=""></div>
+          <div class="iphone side r"><img class="screen" src="assets/img/screens/sfumato-colors.jpg" alt="Sfumato Colors panel with Random Row Colors and mood sliders" loading="lazy"><img class="device-frame" src="assets/img/devices/iphone.png" alt=""></div>
         </div>
-    </section>
+      </section>
 
-    <hr>
-
-    <!-- experience section -->
-    <section id="experience-section">
-        <div class="container">
-            <h1>Education and Exeprience</h1>
-            <article class="experience">
-                <h2>Education Background</h2>
-                <table>
-                    <tr>
-                        <th class="first_col">The University of Melbourne</th>
-                        <th>Master of IT</th>
-                        <th class="last_col">July 2018 - July 2020</th>
-                    </tr>
-                    <tr>
-                        <th class="first_col">University of California, San Diego</th>
-                        <th>Bachelor of Economics (Management Science)</th>
-                        <th class="last_col">Sep 2015 - March 2018</th>
-                    </tr>
-                </table>
-
-                <h2>Projects and Work</h2>
-                <table>
-                    <tr>
-                        <th class="first_col">iOS App - Dictionary Book</th>
-                        <th>Personal Project</th>
-                        <th class="last_col">Oct 2020 - Nov 2020</th>
-                    </tr>
-
-                    <tr>
-                        <th class="first_col">iOS App - Num Trainer</th>
-                        <th>Personal Project</th>
-                        <th class="last_col">Sep 2020 - Oct 2020</th>
-                    </tr>
-
-                    <tr>
-                        <th class="first_col">GAN Model Face Swap & Android App</th>
-                        <th>Team Project</th>
-                        <th class="last_col">Jan 2020 - Feb 2020</th>
-                    </tr>
-
-                    <tr>
-                        <th class="first_col">UniLib Android App Development</th>
-                        <th>Team Project</th>
-                        <th class="last_col">Aug 2019 - Dec 2019</th>
-                    </tr>
-
-                </table>
-
-                <h2>Internship Experience</h2>
-                <table>
-                    <tr>
-                        <th class="first_col">CAPTARGET LLC - Analyst Intern</th>
-                        <th class="last_col">Feb 2016 – May 2017 </th>
-                    </tr>
-                </table>
-                <ul>
-                    <li>Trained with FactSet and Hoovers, organized key data on each platform
-                        to help senior analysts filter target companies;</li>
-                    <li>Built Python script to normalize data formation and transfer data to
-                        FactSet, reduced time needed to process manually in Excel; </li>
-                    <li>Managed and analyzed a master list of Credit Unions in USA, reported to
-                        senior analysts and enhanced researching efficiency in this project;</li>
-                    <li>Implemented a Python module to compare and match email results
-                        generated by company system, improved accuracy by 40% and
-                        shortened the time spent on each spreadsheet.</li>
-                </ul>
-
-                <table>
-                    <tr>
-                        <th class="first_col">Seattle Cell Market LLC - Account Manager</th>
-                        <th class="last_col">Feb 2014 – Dec 2014 </th>
-                    </tr>
-                </table>
-                <ul>
-                    <li>Directed product selection and market sizing analysis, planed future
-                        products, maintained daily operations on Amazon.com and eBay.com;</li>
-                    <li>Built over 30 individual SKUs on Amazon platform, developed purchasing
-                        strategies for contract suppliers;</li>
-                    <li>Analyzed current inventory quantity, manufacturing speed and available
-                        logistic channel/speed to strategically maintain healthy inventory cycle;</li>
-                    <li>Implemented SEO and Campaign techniques on Amazon.com and
-                        improved Unit-Session Ratio of best-selling product to 57%;</li>
-                    <li>Initiated Reverse-Auction strategy on eBay.com to liquidate excess
-                        inventory and managed prices daily;</li>
-                    <li>Assisted with product shipping and customer services while other staff
-                        was busy.</li>
-                </ul>
-            </article>
+      <section class="panel pad-b reveal" id="wallpapers">
+        <div class="rise">
+          <div class="eyebrow">Wallpapers</div>
+          <h2>Or pick one I made.</h2>
+          <p class="sub">Finely crafted wallpaper sets, released every week.</p>
+          <div class="cta"><a class="pill btn" href="https://joeywallpaper.gumroad.com/" target="_blank" rel="noopener">Shop on my Gumroad space ↗</a></div>
+          <div class="devices"><span>iPhone</span><span>iPad</span><span>Mac</span></div>
         </div>
-    </section>
-
-    <hr>
-
-    <!-- contact section -->
-    <section id="contact-section">
-        <div class="container">
-            <h1>Contact Me</h1>
-            <p>If you are interested in my projects or anything, feel free to send me an email at <span>y.studio@outlook.com</span></p>
+        <div class="marquee" aria-label="Wallpaper gallery">
+          <div class="track" id="track">
+            <figure><img src="assets/img/wallpapers/champagne.jpg" alt="Champagne wallpaper" width="176" height="381" loading="lazy"><figcaption>Champagne</figcaption></figure>
+            <figure><img src="assets/img/wallpapers/midnightgold.jpg" alt="Midnight Gold wallpaper" width="176" height="381" loading="lazy"><figcaption>Midnight Gold</figcaption></figure>
+            <figure><img src="assets/img/wallpapers/oceansilk.jpg" alt="Ocean Silk wallpaper" width="176" height="381" loading="lazy"><figcaption>Ocean Silk</figcaption></figure>
+            <figure><img src="assets/img/wallpapers/aurora.jpg" alt="Aurora wallpaper" width="176" height="381" loading="lazy"><figcaption>Aurora</figcaption></figure>
+            <figure><img src="assets/img/wallpapers/peach.jpg" alt="Peach wallpaper" width="176" height="381" loading="lazy"><figcaption>Peach</figcaption></figure>
+            <figure><img src="assets/img/wallpapers/emeraldnoir.jpg" alt="Emerald Noir wallpaper" width="176" height="381" loading="lazy"><figcaption>Emerald Noir</figcaption></figure>
+            <figure><img src="assets/img/wallpapers/titanium.jpg" alt="Titanium wallpaper" width="176" height="381" loading="lazy"><figcaption>Titanium</figcaption></figure>
+            <figure><img src="assets/img/wallpapers/rosequartz.jpg" alt="Rose Quartz wallpaper" width="176" height="381" loading="lazy"><figcaption>Rose Quartz</figcaption></figure>
+          </div>
         </div>
-    </section>
+      </section>
 
+      <section class="panel reveal" id="pinwall">
+        <div class="rise">
+          <div class="eyebrow"><img src="assets/img/icons/pinwall.jpg" alt="">PinWall</div>
+          <h2>Your Lock Screen, pinned.</h2>
+          <p class="sub">Notes, reminders and photo stickers, placed right on your own wallpaper. Easy to make changes with Shortcuts.</p>
+          <div class="cta"><a class="store-badge" href="https://apps.apple.com/app/pinwall-lock-screen-notes/id6819263109" target="_blank" rel="noopener"><img src="assets/img/badges/app-store.svg" alt="Download on the App Store" width="120" height="40"></a><span class="plat">iPhone</span></div>
+        </div>
+        <div class="trio">
+          <div class="iphone side l"><img class="screen" src="assets/img/screens/pinwall-note.jpg" alt="PinWall Edit Note sheet with sticker styles and outline width" loading="lazy"><img class="device-frame" src="assets/img/devices/iphone.png" alt="" loading="lazy"></div>
+          <div class="iphone mid"><img class="screen" src="assets/img/screens/pinwall-canvas.jpg" alt="PinWall wallpaper with a note, an emoji and a cat photo sticker" loading="lazy"><img class="device-frame" src="assets/img/devices/iphone.png" alt="" loading="lazy"></div>
+          <div class="iphone side r"><img class="screen" src="assets/img/screens/pinwall-layers.jpg" alt="PinWall Layers sheet listing two notes, an image and the wallpaper background" loading="lazy"><img class="device-frame" src="assets/img/devices/iphone.png" alt="" loading="lazy"></div>
+        </div>
+      </section>
 
-        <!-- joke section -->
-        <section id="joke-section">
-            <div class="container">
-                <button id="joke-btn">Want a Joke?</button>
-                <p id="joke-display"></p>
-            </div>
-        </section>
-    
-        <hr>
+      <section class="panel reveal" id="drifting-map">
+        <div class="rise">
+          <div class="eyebrow"><img src="assets/img/icons/drifting-map.jpg" alt="">Drifting Map</div>
+          <h2>Your city, slowly drifting by.</h2>
+          <p class="sub">A live map wallpaper that moves behind your desktop. Eight beautiful built-in palettes with both light and dark settings.</p>
+          <div class="cta"><a class="store-badge" href="https://apps.apple.com/app/drifting-map/id6820924695" target="_blank" rel="noopener"><img src="assets/img/badges/mac-app-store.svg" alt="Download on the Mac App Store" width="156" height="40"></a><span class="plat">Mac</span></div>
+        </div>
+        <div class="trio macs">
+          <div class="macbook side l"><div class="screen"><img src="assets/img/screens/drifting-map-settings.jpg" alt="Drifting Map menu with location, zoom and drift speed" loading="lazy"></div><img class="device-frame" src="assets/img/devices/macbook.png" alt="" loading="lazy"></div>
+          <div class="macbook mid"><div class="screen drift"><img src="assets/img/screens/drifting-map-melbourne.jpg" alt="Drifting Map showing central Melbourne, slowly moving" loading="lazy"><span class="menu">Melbourne · drifting</span></div><img class="device-frame" src="assets/img/devices/macbook.png" alt="" loading="lazy"></div>
+          <div class="macbook side r"><div class="screen"><img src="assets/img/screens/drifting-map-palettes.jpg" alt="Drifting Map palette grid in light mode" loading="lazy"></div><img class="device-frame" src="assets/img/devices/macbook.png" alt="" loading="lazy"></div>
+        </div>
+      </section>
 
+      <section class="panel reveal" id="numtrainer">
+        <div class="rise">
+          <div class="eyebrow"><img src="assets/img/icons/numtrainer.jpg" alt="">NumTrainer</div>
+          <h2>Sharpen your number sense.</h2>
+          <p class="sub">Train your focus, recall and mental math. Four timed practices to improve your mental strength on the go.</p>
+          <div class="cta"><a class="store-badge" href="https://apps.apple.com/app/num-trainer/id1531055741" target="_blank" rel="noopener"><img src="assets/img/badges/app-store.svg" alt="Download on the App Store" width="120" height="40"></a><span class="plat">iPhone · iPad</span></div>
+        </div>
+        <div class="trio">
+          <div class="iphone side l"><img class="screen" src="assets/img/screens/numtrainer-tap.jpg" alt="Tap in Order practice: a 5 by 5 grid of numbers, six tapped" loading="lazy"><img class="device-frame" src="assets/img/devices/iphone.png" alt="" loading="lazy"></div>
+          <div class="iphone mid"><img class="screen" src="assets/img/screens/numtrainer-home.jpg" alt="NumTrainer home with Mental Math, Number Pairs, Tap in Order and Digit-by-Digit Math" loading="lazy"><img class="device-frame" src="assets/img/devices/iphone.png" alt="" loading="lazy"></div>
+          <div class="iphone side r"><img class="screen" src="assets/img/screens/numtrainer-math.jpg" alt="Mental Math practice asking 45 plus 7 with a number pad" loading="lazy"><img class="device-frame" src="assets/img/devices/iphone.png" alt="" loading="lazy"></div>
+        </div>
+      </section>
+    </div>
+  </main>
 
-    <!-- footer -->
-    <footer>
-        <p>Y.Studio, Copyright &copy; 2020</p>
-    </footer>
-
-
-    <script src="main.js"></script>
+  <footer class="foot">
+    <div class="wrap">
+      <span class="brand">Joooe</span>
+      <nav aria-label="Elsewhere">
+        <a class="social" href="https://www.threads.com/@gearless.joooe" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"/></svg>Threads</a>
+        <a class="social" href="https://x.com/gearlessjoooe" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>X</a>
+        <a class="social" href="mailto:y.studio@outlook.com" title="y.studio@outlook.com" aria-label="Email y.studio@outlook.com"><svg class="line" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3.8 7 8.2 6.2L20.2 7"/></svg>Email</a>
+      </nav>
+      <span>© 2026 Joooe</span>
+      <p class="legal">Apple, the Apple logo, iPhone, iPad, Mac and App Store are trademarks of Apple Inc., registered in the U.S. and other countries. Mac App Store is a service mark of Apple Inc.</p>
+    </div>
+  </footer>
 </body>
 </html>
