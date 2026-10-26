@@ -119,6 +119,19 @@ section[id]{scroll-margin-top:64px}
 .folded .trio .side.l{transform:translateX(55%) scale(.9)}
 .folded .trio .side.r{transform:translateX(-55%) scale(.9)}
 .folded.open .trio .side{transform:none}
+/* where the browser can, the unfold follows the scroll itself instead of a timer: it starts as the devices
+   come up from the bottom of the screen and finishes as they are fully in view, so it moves exactly with the
+   finger, even mid-fling, and folds back on the way up. The panel clips with overflow:clip, which, unlike
+   hidden, is not a scroller of its own, so the timeline tracks the page (min-width:0 keeps the wallpaper
+   conveyor from widening it, which hidden used to do on its own). */
+@supports (animation-timeline:view()){
+  .panel{overflow:clip;min-width:0}
+  .trio{view-timeline:--trio}
+  .trio .side{transition:none;animation:unfold linear both;animation-timeline:--trio;animation-range:cover 4% cover 40%}
+  .trio .side.l{--fold:55%}
+  .trio .side.r{--fold:-55%}
+  @keyframes unfold{from{transform:translateX(var(--fold)) scale(.9)}to{transform:none}}
+}
 /* MacBooks are wide, so each side tucks about a quarter of the centre's width behind it */
 .trio.macs{--mid:clamp(250px,42vw,480px);--ratio:.659}
 .trio.macs .side{margin-inline:calc(var(--mid) * -.24)}
