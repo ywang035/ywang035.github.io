@@ -106,11 +106,11 @@ section[id]{scroll-margin-top:64px}
 
 /* three devices, one component for every app: the sides slide out from behind the centre.
    --mid is the centre device's width, --ratio its height / width. */
-.trio{--mid:clamp(170px,25vw,270px);--ratio:2.0415;display:flex;justify-content:center;align-items:flex-start;gap:clamp(14px,3vw,36px);margin-top:clamp(40px,6vw,64px);margin-bottom:clamp(32px,5vw,56px)}
+.trio{--mid:clamp(170px,25vw,270px);--ratio:2.0415;display:flex;justify-content:center;align-items:flex-start;margin-top:clamp(40px,6vw,64px);margin-bottom:clamp(32px,5vw,56px)}
 .trio .mid{width:var(--mid);z-index:1}
 /* sides: 80% of the centre device, set so their bottoms end 18px above its bottom
-   (20% of the centre's height, less 18px) */
-.trio .side{width:calc(var(--mid) * .8);margin-top:calc(var(--mid) * var(--ratio) * .2 - 18px);transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+   (20% of the centre's height, less 18px), their inner edges just tucked behind it */
+.trio .side{width:calc(var(--mid) * .8);margin-top:calc(var(--mid) * var(--ratio) * .2 - 18px);margin-inline:calc(var(--mid) * -.04);transition:transform .9s cubic-bezier(.2,.8,.2,1)}
 /* the sides wait folded behind the centre until the panel's middle reaches mid-screen (site.js adds .open,
    then drops both classes once they have landed). While folded they sit on their own layers, ready to move. */
 .panel{position:relative}
@@ -120,7 +120,7 @@ section[id]{scroll-margin-top:64px}
 .folded .trio .side.r{transform:translateX(-55%) scale(.9)}
 .folded.open .trio .side{transform:none}
 /* MacBooks are wide, so each side tucks about a quarter of the centre's width behind it */
-.trio.macs{--mid:clamp(250px,42vw,480px);--ratio:.659;gap:0}
+.trio.macs{--mid:clamp(250px,42vw,480px);--ratio:.659}
 .trio.macs .side{margin-inline:calc(var(--mid) * -.24)}
 
 /* wallpapers: an endless, slow conveyor; pauses under the pointer */
@@ -159,7 +159,6 @@ section[id]{scroll-margin-top:64px}
 
 @media (max-width:640px){
   .nav nav{display:none}
-  .trio{gap:0}
   .trio .side{margin-inline:-14px}
 }
 @media (prefers-reduced-motion:reduce){
