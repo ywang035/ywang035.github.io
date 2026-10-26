@@ -60,8 +60,10 @@
      A marker at each panel's middle is watched against a line at 55% of the
      viewport, so scrolling runs no script; the line's area reaches far above
      the screen, so jumping past a panel opens it too. Once the sides land,
-     both classes go and the sides give up their layers. */
-  if ("IntersectionObserver" in window && !reduce) {
+     both classes go and the sides give up their layers. Browsers that can
+     tie the unfold to the scroll do it in CSS instead (see site.css). */
+  var scrollLinked = window.CSS && CSS.supports && CSS.supports("animation-timeline: view()");
+  if ("IntersectionObserver" in window && !reduce && !scrollLinked) {
     var unfold = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
